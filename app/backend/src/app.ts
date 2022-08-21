@@ -26,10 +26,10 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+    // this.app.use(loginRouter);
   }
 
   public start(PORT: string | number): void {
-    this.app.use(loginRouter);
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
   }
 }

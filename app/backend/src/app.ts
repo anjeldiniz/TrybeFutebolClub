@@ -1,4 +1,5 @@
 import * as express from 'express';
+const loginRouter = require('./routes/loginRouter');
 
 class App {
   public app: express.Express;
@@ -12,10 +13,13 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
 
-  private config():void {
+  private config(): void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
+      res.header(
+        'Access-Control-Allow-Methods',
+        'GET,POST,DELETE,OPTIONS,PUT,PATCH',
+      );
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
@@ -24,7 +28,8 @@ class App {
     this.app.use(accessControl);
   }
 
-  public start(PORT: string | number):void {
+  public start(PORT: string | number): void {
+    this.app.use(loginRouter);
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
   }
 }

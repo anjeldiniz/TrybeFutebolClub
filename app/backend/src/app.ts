@@ -1,5 +1,11 @@
 import * as express from 'express';
-const loginRouter = require('./routes/loginRouter');
+import 'express-async-errors';
+import loginRouter from './routes/loginRouter';
+import { NextFunction, Request, Response } from 'express';
+
+interface middlewareError extends Error {
+  status: number;
+}
 
 class App {
   public app: express.Express;
@@ -26,7 +32,15 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
-    // this.app.use(loginRouter);
+    this.app.use('/login', loginRouter);
+
+    this.app.use((
+      error: middlewareError,
+      _req: Request, 
+      res: Response,
+      _next: NextFunction, 
+    ) => { res.status(error.status || 500).json({ message: error.message })
+  });
   }
 
   public start(PORT: string | number): void {

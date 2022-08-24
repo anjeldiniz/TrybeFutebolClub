@@ -3,18 +3,18 @@ import db from '.';
 
 class Teams extends Model {
   declare id: number;
-  declare team_name: string;
+  declare teamName: string;
 }
-  
+
 Teams.init(
   {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
-    team_name: {
+    teamName: {
       type: DataTypes.STRING,
       allowNull: false,
     },

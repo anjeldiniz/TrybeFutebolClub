@@ -1,11 +1,9 @@
 import * as express from 'express';
 import 'express-async-errors';
+import errorMiddelware from './middelware/errorMiddelware';
 import loginRouter from './routes/loginRouter';
-import { NextFunction, Request, Response } from 'express';
-
-interface middlewareError extends Error {
-  status: number;
-}
+import teamsRouter from './routes/teamsRouter';
+// import matchesRouter from './routes/matchesRouter';
 
 class App {
   public app: express.Express;
@@ -29,20 +27,12 @@ class App {
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
-
     this.app.use(express.json());
     this.app.use(accessControl);
     this.app.use('/login', loginRouter);
-
-    this.app.use((
-      error: middlewareError,
-      _req: Request, 
-      res: Response,
-      _next: NextFunction, 
-    ) => { 
-      console.log(error.message);
-      res.status(error.status || 500).json({ message: error.message })
-  });
+    this.app.use('/teams', teamsRouter);
+    // this.app.use('/matches', matchesRouter);
+    this.app.use(errorMiddelware);
   }
 
   public start(PORT: string | number): void {

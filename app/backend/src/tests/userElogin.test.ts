@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const mockUser ={
+const mockUser = {
     username: 'Admin',
     role: 'admin',
     email: 'admin@admin.com',
@@ -65,10 +65,10 @@ describe('Test the router login', () => {
       const { message } = chaiHttpResponse.body;
       const { status } = chaiHttpResponse;
       expect(message).to.equal('Incorrect email or password');
-      expect(status).to.equal(400);
+      expect(status).to.equal(401);
   });
 
-  it('token is invalidate', async () => {
+  it('token is validate', async () => {
     chaiHttpResponse = await chai
        .request(app)
        .post('/login/validate')
@@ -86,6 +86,6 @@ describe('Test the router login', () => {
        .post('/login/validate')
        .send();
       const { status } = chaiHttpResponse;
-      expect(status).to.equal(404);
+      expect(status).to.equal(401);
   });
 });

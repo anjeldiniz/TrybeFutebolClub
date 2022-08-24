@@ -7,4 +7,11 @@ export default class TeamsService {
     });
     return teams;
   };
+
+  static findById = async (id: string) => {
+    const teams = await Teams.findByPk(id, {
+      raw: true,
+    });
+    return teams;
+  };
 }

@@ -5,7 +5,7 @@ import validateToken from '../middelware/validateToken';
 const router = Router();
 
 router.get('/', matchesController.matches);
-router.post('/', validateToken.validateT, matchesController.saveMt);
+router.post('/', validateToken.validateT, matchesController.addMt);
 router.patch('/:id/finish', matchesController.matchesId);
 
 export default router;

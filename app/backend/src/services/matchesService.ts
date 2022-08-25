@@ -1,5 +1,9 @@
 import Teams from '../database/models/teams';
 import Matches from '../database/models/matches';
+import { iMatches } from '../interface/iMatche';
+import Unauthorized from '../error/unauthorized';
+import NotFound from '../error/notFound';
+import TeamsService from './teamsService';
 
 export default class MatchesService {
   static findMatches = async () => {
@@ -19,7 +23,7 @@ export default class MatchesService {
     return matches;
   };
 
-  static saveMatch = async (matches: object) => {
+  static addMatch = async (matches: object) => {
     const createMatches = await Matches.create({ ...matches, inProgress: 0 });
     return createMatches;
   };
@@ -31,5 +35,17 @@ export default class MatchesService {
       where: { id },
     });
     return true;
+  };
+
+  static noSameTeam = async (match: iMatches) => {
+    const { homeTeam, awayTeam } = match;
+    if (homeTeam === awayTeam) {
+      throw new Unauthorized('It is not possible to create a match with two equal teams');
+    }
+    const homeTeamExist = await TeamsService.findById(homeTeam);
+    const awayTeamExist = await TeamsService.findById(awayTeam);
+    if (!homeTeamExist || !awayTeamExist) {
+      throw new NotFound('There is no team with such id!');
+    }
   };
 }

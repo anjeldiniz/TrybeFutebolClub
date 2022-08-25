@@ -7,9 +7,10 @@ export default class MatchesController {
     res.status(200).json(matchesAll);
   };
 
-  static saveMt = async (req: Request, res: Response) => {
-    const saveMatches = await matchesService.saveMatch(req.body);
-    res.status(201).json(saveMatches);
+  static addMt = async (req: Request, res: Response) => {
+    await matchesService.noSameTeam(req.body);
+    const addMatches = await matchesService.addMatch(req.body);
+    res.status(201).json(addMatches);
   };
 
   static matchesId = async (req: Request, res: Response) => {

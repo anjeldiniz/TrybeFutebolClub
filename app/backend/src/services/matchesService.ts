@@ -24,10 +24,12 @@ export default class MatchesService {
     return createMatches;
   };
 
-  // static findById = async (id: string) => {
-  //   const matches = await Matches.findByPk(id, {
-  //     raw: true,
-  //   });
-  //   return matches;
-  // };
+  static findById = async (id: number) => {
+    await Matches.update({
+      inProgress: false,
+    }, {
+      where: { id },
+    });
+    return true;
+  };
 }

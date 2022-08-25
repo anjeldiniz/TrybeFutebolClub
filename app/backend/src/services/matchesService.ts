@@ -19,6 +19,11 @@ export default class MatchesService {
     return matches;
   };
 
+  static saveMatch = async (matches: object) => {
+    const createMatches = await Matches.create({ ...matches, inProgress: 0 });
+    return createMatches;
+  };
+
   // static findById = async (id: string) => {
   //   const matches = await Matches.findByPk(id, {
   //     raw: true,

@@ -28,7 +28,7 @@ export default class MatchesService {
     return createMatches;
   };
 
-  static findById = async (id: number) => {
+  static findByIdF = async (id: number) => {
     await Matches.update({
       inProgress: false,
     }, {
@@ -47,5 +47,16 @@ export default class MatchesService {
     if (!homeTeamExist || !awayTeamExist) {
       throw new NotFound('There is no team with such id!');
     }
+  };
+
+  static findById = async (id: number,  homeTeamGoals: number,
+    awayTeamGoals: number,) => {
+    await Matches.update({
+      homeTeamGoals,
+      awayTeamGoals,
+    }, {
+      where: { id },
+    });
+    return true;
   };
 }

@@ -13,9 +13,16 @@ export default class MatchesController {
     res.status(201).json(addMatches);
   };
 
+  static matchesIdF = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await matchesService.findByIdF(Number(id));
+    res.status(200).json({ message: 'Finished' });
+  };
+
   static matchesId = async (req: Request, res: Response) => {
     const { id } = req.params;
-    await matchesService.findById(Number(id));
-    res.status(200).json({ message: 'Finished' });
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    await matchesService.findById(Number(id), homeTeamGoals, awayTeamGoals);
+    res.status(200).json({ message: 'ok' });
   };
 }

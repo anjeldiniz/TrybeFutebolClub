@@ -24,7 +24,7 @@ export default class ValidateToken {
       jwt.verify(authorization as string, secret);
       next();
     } catch (_error) {
-      throw new TokenUnauthorized('Incorrect token');
+      throw new TokenUnauthorized('Token must be a valid token');
     }
   };
 }

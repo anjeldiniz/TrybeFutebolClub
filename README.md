@@ -5,10 +5,15 @@ Esse projeto consiste de uma aplicação fullstack:
 Como utilizar:
 
 clonar o repositório
+
 rodar o comando npm install
+
 rodar o comando npm run postinstall // executa o npm install dentro das pastas frontend e backend
+
 rodar o comando npm run compose:up // para que o docker-compose faça o up da aplicação
+
 O frontend pode ser acessado em http://localhost:3000
+
 O backend pode ser acessado em http://localhost:3001
 
 Tecnologias utilizadas:

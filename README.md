@@ -1,21 +1,17 @@
-BEM AMIGOS DA REDE GITHUB ... ⚽️
-Trybe Futebol Club
-Esse projeto consiste de uma aplicação fullstack
+Trybe Futebol Club ⚽️
 
-Como utilizar
+Esse projeto consiste de uma aplicação fullstack:
+
+Como utilizar:
+
 clonar o repositório
-
 rodar o comando npm install
-
 rodar o comando npm run postinstall // executa o npm install dentro das pastas frontend e backend
-
 rodar o comando npm run compose:up // para que o docker-compose faça o up da aplicação
-
 O frontend pode ser acessado em http://localhost:3000
-
 O backend pode ser acessado em http://localhost:3001
 
-Tecnologias utilizadas
+Tecnologias utilizadas:
 O backend foi desenvolvido utilizando Node com Express e TypeScrypt aplicando alguns dos principios SOLID e o sequelize como ORM. Ainda foram utilizadas as bibliotecas JWT para geração de token, bcrypt para salvar a senha encryptada no banco de dados e joi para validações.
 
 O frontend foi desenvolvido em react pela Trybe.
